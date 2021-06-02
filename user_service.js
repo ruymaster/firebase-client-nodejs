@@ -10,5 +10,11 @@ const fb = firebase.initializeApp({
 exports.addUser = (email, password) =>
   fb.auth().createUserWithEmailAndPassword(email, password);
 
-exports.authenticate = (email, password) =>
-  fb.auth().signInWithEmailAndPassword(email, password);
+exports.authenticate = async (email, password) =>
+  {    
+    await fb.auth().signInWithEmailAndPassword(email, password);
+    const user = fb.auth().currentUser;    
+    const token = await user.getIdToken();    
+    // console.log("----user token id", user.uid,  token)
+    return {uid: user.uid, token};
+  }

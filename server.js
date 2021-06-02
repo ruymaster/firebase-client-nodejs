@@ -18,7 +18,7 @@ app.post("/signup", async (req, res) => {
 app.post("/signin", async (req, res) => {
   const { email, password } = req.body;
   try {
-    const user = await userService.authenticate(email, password);
+    const user = await userService.authenticate(email, password);    
     res.json(user);
   } catch (err) {
     res.status(401).json({ error: err.message });
